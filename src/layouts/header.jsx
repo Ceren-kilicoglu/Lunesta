@@ -5,8 +5,8 @@ import { Search, ShoppingCart, Heart, User, Menu, ChevronDown } from "lucide-rea
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false); // State for Shop dropdown
-    const [isMobileShopDropdownOpen, setIsMobileShopDropdownOpen] = useState(false); // State for Shop dropdown in hamburger menu
+    const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
+    const [isMobileShopDropdownOpen, setIsMobileShopDropdownOpen] = useState(false);
 
     const handleMenuToggle = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -16,7 +16,7 @@ const Header = () => {
         setIsSearchOpen(!isSearchOpen);
     };
 
-    // Sayfa kaymasını engelleme
+
     useEffect(() => {
         if (isMenuOpen || isSearchOpen) {
             document.body.style.overflow = "hidden";
@@ -38,8 +38,8 @@ const Header = () => {
                                 className="text-sm font-semibold sm:text-base text-navcolor hover:text-gray-400 no-underline"
                                 onClick={(e) => {
                                     if (item.title === "Shop") {
-                                        e.preventDefault(); // Prevent navigation
-                                        setIsShopDropdownOpen(!isShopDropdownOpen); // Toggle dropdown visibility
+                                        e.preventDefault();
+                                        setIsShopDropdownOpen(!isShopDropdownOpen);
                                     }
                                 }}
                             >
@@ -151,8 +151,8 @@ const Header = () => {
                                 className="block text-sm sm:text-base text-gray-700 py-2 hover:text-gray-500 no-underline"
                                 onClick={(e) => {
                                     if (item.title === "Shop") {
-                                        e.preventDefault(); // Prevent navigation
-                                        setIsMobileShopDropdownOpen(!isMobileShopDropdownOpen); // Toggle dropdown visibility
+                                        e.preventDefault();
+                                        setIsMobileShopDropdownOpen(!isMobileShopDropdownOpen);
                                     }
                                 }}
                             >
