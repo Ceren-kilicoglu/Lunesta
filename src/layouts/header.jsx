@@ -35,35 +35,23 @@ const Header = () => {
                         <div key={item.id} className="relative">
                             <a
                                 href={item.link}
-                                className="text-sm font-semibold sm:text-base text-navcolor hover:text-gray-400 no-underline"
-                                onClick={(e) => {
-                                    if (item.title === "Shop") {
-                                        e.preventDefault();
-                                        setIsShopDropdownOpen(!isShopDropdownOpen);
-                                    }
-                                }}
+                                className="text-sm font-bold sm:text-base text-navcolor hover:text-gray-400 no-underline"
+                                onClick={(e) => item.title === "Shop" && (e.preventDefault(), setIsShopDropdownOpen(!isShopDropdownOpen))}
                             >
                                 {item.title}
-                                {item.title === "Shop" && (
-                                    <ChevronDown className="ml-1 inline-block w-4 h-4" />
-                                )}
+                                {item.title === "Shop" && <ChevronDown className="ml-1 inline-block w-4 h-4" />}
                             </a>
-
-                            {/* Dropdown for Shop */}
                             {isShopDropdownOpen && item.title === "Shop" && (
                                 <div className="absolute left-0 mt-2 w-max-content bg-white border border-gray-300 shadow-md rounded-md">
-                                    <a
-                                        href="/shop/man"
-                                        className="block text-sm text-gray-700 py-2 px-4 hover:bg-gray-200"
-                                    >
-                                        Man
-                                    </a>
-                                    <a
-                                        href="/shop/woman"
-                                        className="block text-sm text-gray-700 py-2 px-4 hover:bg-gray-200"
-                                    >
-                                        Woman
-                                    </a>
+                                    {["Man", "Woman"].map((gender) => (
+                                        <a
+                                            key={gender}
+                                            href={`/shop/${gender.toLowerCase()}`}
+                                            className="block py-2 px-4 text-sm font-normal sm:text-base text-navcolor hover:text-gray-400 no-underline"
+                                        >
+                                            {gender}
+                                        </a>
+                                    ))}
                                 </div>
                             )}
                         </div>
@@ -71,46 +59,37 @@ const Header = () => {
                 </nav>
 
                 <div className="flex items-center space-x-4">
-                    {data.actions.map((action) => {
-                        if (action.type === "button") {
-                            return (
-                                <a
-                                    key={action.id}
-                                    href={action.link}
-                                    className="hidden md:flex items-center text-sm font-semibold sm:text-base text-blue hover:text-gray-500 no-underline"
-                                >
-                                    <User className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
-                                    {action.title}
-                                </a>
-                            );
-                        }
-                        return null;
-                    })}
+                    {data.actions.map((action) => action.type === "button" && (
+                        <a
+                            key={action.id}
+                            href={action.link}
+                            className="hidden md:flex items-center text-sm font-semibold sm:text-base text-blue hover:text-gray-500 no-underline"
+                        >
+                            <User className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
+                            {action.title}
+                        </a>
+                    ))}
 
                     <button
                         onClick={handleSearchToggle}
-                        className="w-6 h-6 text-blue hover:text-gray-500"
+                        className="w-6 h-6 text-gray-500 hover:text-gray-300 md:text-blue md:hover:text-gray-500"
                     >
                         <Search />
                     </button>
 
-                    {data.actions.map((action) => {
-                        if (action.type === "icon" && action.name !== "Search") {
-                            const IconComponent = action.name === "ShoppingCart" ? ShoppingCart :
-                                action.name === "Heart" ? Heart : null;
-
-                            return (
-                                <a
-                                    key={action.id}
-                                    href={action.link}
-                                    className="text-blue hover:text-gray-500"
-                                >
-                                    <IconComponent className="w-5 h-5 sm:w-6 sm:h-6" />
-                                </a>
-                            );
-                        }
-                        return null;
-                    })}
+                    {data.actions.map((action) => action.type === "icon" && action.name !== "Search" && (
+                        <a
+                            key={action.id}
+                            href={action.link}
+                            className="text-gray-500 hover:text-gray-300 md:text-blue md:hover:text-gray-500"
+                        >
+                            {action.name === "ShoppingCart" ? (
+                                <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
+                            ) : action.name === "Heart" ? (
+                                <Heart className="w-5 h-5 sm:w-6 sm:h-6" />
+                            ) : null}
+                        </a>
+                    ))}
 
                     <button
                         onClick={handleMenuToggle}
@@ -127,10 +106,7 @@ const Header = () => {
                     className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50"
                     onClick={() => setIsSearchOpen(false)}
                 >
-                    <div
-                        className="mt-4 w-full max-w-md p-2 bg-white rounded-md shadow-lg relative"
-                        onClick={(e) => e.stopPropagation()}
-                    >
+                    <div className="mt-4 w-full max-w-md p-2 bg-white rounded-md shadow-lg relative" onClick={(e) => e.stopPropagation()}>
                         <input
                             type="text"
                             placeholder="Search..."
@@ -143,61 +119,45 @@ const Header = () => {
             )}
 
             {isMenuOpen && (
-                <div className="md:hidden p-4 flex flex-col items-center">
+                <div className="md:hidden p-4 flex flex-col items-center ">
                     {data.menu.map((item) => (
                         <div key={item.id} className="relative">
                             <a
                                 href={item.link}
-                                className="block text-sm sm:text-base text-gray-700 py-2 hover:text-gray-500 no-underline"
-                                onClick={(e) => {
-                                    if (item.title === "Shop") {
-                                        e.preventDefault();
-                                        setIsMobileShopDropdownOpen(!isMobileShopDropdownOpen);
-                                    }
-                                }}
+                                className="block font-bold text-xl sm:xl text-gray-500 py-2 hover:text-gray-300 no-underline"
+                                onClick={(e) => item.title === "Shop" && (e.preventDefault(), setIsMobileShopDropdownOpen(!isMobileShopDropdownOpen))}
                             >
                                 {item.title}
-                                {item.title === "Shop" && (
-                                    <ChevronDown className="ml-1 inline-block w-4 h-4" />
-                                )}
+                                {item.title === "Shop" && <ChevronDown className="ml-1 inline-block w-4 h-4" />}
                             </a>
-
-                            {/* Mobile Dropdown for Shop */}
                             {isMobileShopDropdownOpen && item.title === "Shop" && (
                                 <div className="ml-4 mt-2 w-full bg-white border border-gray-300 shadow-md rounded-md">
-                                    <a
-                                        href="/shop/man"
-                                        className="block text-sm text-gray-700 py-2 px-4 hover:bg-gray-200"
-                                    >
-                                        Man
-                                    </a>
-                                    <a
-                                        href="/shop/woman"
-                                        className="block text-sm text-gray-700 py-2 px-4 hover:bg-gray-200"
-                                    >
-                                        Woman
-                                    </a>
+                                    {["Man", "Woman"].map((gender) => (
+                                        <a
+                                            key={gender}
+                                            href={`/shop/${gender.toLowerCase()}`}
+                                            className="block text-md text-gray-500 py-2 hover:text-gray-300 no-underline py-2 px-4"
+                                        >
+                                            {gender}
+                                        </a>
+                                    ))}
                                 </div>
                             )}
                         </div>
                     ))}
-                    {data.actions.map((action) => {
-                        if (action.type === "button") {
-                            return (
-                                <a
-                                    key={action.id}
-                                    href={action.link}
-                                    className="block text-sm sm:text-base text-gray-700 py-2 hover:text-gray-500 no-underline"
-                                >
-                                    {action.title}
-                                </a>
-                            );
-                        }
-                        return null;
-                    })}
+                    {data.actions.map((action) => action.type === "button" && (
+                        <a
+                            key={action.id}
+                            href={action.link}
+                            className="block font-bold text-xl sm:xl text-gray-500 py-2 hover:text-gray-300 no-underline"
+                        >
+                            {action.title}
+                        </a>
+                    ))}
                 </div>
             )}
         </header>
+
     );
 };
 
