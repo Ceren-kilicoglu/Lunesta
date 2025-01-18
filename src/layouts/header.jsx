@@ -1,48 +1,31 @@
 import { useState, useEffect } from "react";
+import { Search, ShoppingCart, Heart, User, Menu, ChevronDown, X } from "lucide-react"; // Import X icon
 import { data } from "../data/data";
-import { Search, ShoppingCart, Heart, User, Menu, ChevronDown } from "lucide-react";
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
-    const [isMobileShopDropdownOpen, setIsMobileShopDropdownOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-    const handleMenuToggle = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
-
-    const handleSearchToggle = () => {
-        setIsSearchOpen(!isSearchOpen);
-    };
-
-    const handleOverlayClick = (e) => {
-        if (e.target === e.currentTarget) {
-            setIsMenuOpen(false);
-            setIsMobileShopDropdownOpen(false); // Close mobile shop dropdown if overlay is clicked
-        }
-    };
-
-    const handleShopDropdownToggle = (e, title) => {
+    const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+    const toggleShopDropdown = (e) => {
         e.preventDefault();
-        if (title === "Shop") {
-            setIsShopDropdownOpen(!isShopDropdownOpen);
-        }
+        setIsShopDropdownOpen((prev) => !prev);
     };
-
-    const handleMobileShopDropdownToggle = (e, title) => {
-        e.preventDefault();
-        if (title === "Shop") {
-            setIsMobileShopDropdownOpen(!isMobileShopDropdownOpen);
-        }
-    };
+    const toggleSearch = () => setIsSearchOpen((prev) => !prev);
 
     useEffect(() => {
-        if (isMenuOpen || isSearchOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "auto";
-        }
+        const handleOutsideClick = (e) => {
+            if (!e.target.closest(".dropdown")) setIsShopDropdownOpen(false);
+            if (!e.target.closest(".menu") && !e.target.closest(".menu-btn")) setIsMenuOpen(false); // Close menu when clicking outside
+        };
+
+        document.addEventListener("click", handleOutsideClick);
+        return () => document.removeEventListener("click", handleOutsideClick);
+    }, []);
+
+    useEffect(() => {
+        document.body.style.overflow = isMenuOpen || isSearchOpen ? "hidden" : "auto";
     }, [isMenuOpen, isSearchOpen]);
 
     return (
@@ -52,11 +35,11 @@ const Header = () => {
 
                 <nav className="hidden md:flex justify-center space-x-4 lg:space-x-6">
                     {data.menu.map((item) => (
-                        <div key={item.id} className="relative">
+                        <div key={item.id} className="relative dropdown">
                             <a
                                 href={item.link}
                                 className="text-sm font-bold sm:text-base text-navcolor hover:text-pinky no-underline"
-                                onClick={(e) => handleShopDropdownToggle(e, item.title)}
+                                onClick={item.title === "Shop" ? toggleShopDropdown : null}
                             >
                                 {item.title}
                                 {item.title === "Shop" && <ChevronDown className="ml-1 inline-block w-4 h-4" />}
@@ -79,44 +62,51 @@ const Header = () => {
                 </nav>
 
                 <div className="flex items-center space-x-4">
-                    {data.actions.map((action) => action.type === "button" && (
-                        <a
-                            key={action.id}
-                            href={action.link}
-                            className="hidden md:flex items-center text-sm font-semibold sm:text-base text-blue hover:text-pinky no-underline"
-                        >
-                            <User className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
-                            {action.title}
-                        </a>
-                    ))}
+                    {data.actions.map(
+                        (action) =>
+                            action.type === "button" && (
+                                <a
+                                    key={action.id}
+                                    href={action.link}
+                                    className="hidden md:flex items-center text-sm font-semibold sm:text-base text-blue hover:text-pinky no-underline"
+                                >
+                                    <User className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
+                                    {action.title}
+                                </a>
+                            )
+                    )}
 
                     <button
-                        onClick={handleSearchToggle}
-                        className="w-6 h-6 text-gray-500 hover:text-pinky md:text-blue "
+                        onClick={toggleSearch}
+                        className="w-6 h-6 text-gray-500 hover:text-pinky md:text-blue"
                     >
                         <Search />
                     </button>
 
-                    {data.actions.map((action) => action.type === "icon" && action.name !== "Search" && (
-                        <a
-                            key={action.id}
-                            href={action.link}
-                            className="text-gray-500 hover:text-pinky md:text-blue "
-                        >
-                            {action.name === "ShoppingCart" ? (
-                                <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
-                            ) : action.name === "Heart" ? (
-                                <Heart className="w-5 h-5 sm:w-6 sm:h-6" />
-                            ) : null}
-                        </a>
-                    ))}
+                    {data.actions.map(
+                        (action) =>
+                            action.type === "icon" &&
+                            action.name !== "Search" && (
+                                <a
+                                    key={action.id}
+                                    href={action.link}
+                                    className="text-gray-500 hover:text-pinky md:text-blue"
+                                >
+                                    {action.name === "ShoppingCart" ? (
+                                        <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
+                                    ) : action.name === "Heart" ? (
+                                        <Heart className="w-5 h-5 sm:w-6 sm:h-6" />
+                                    ) : null}
+                                </a>
+                            )
+                    )}
 
                     <button
-                        onClick={handleMenuToggle}
+                        onClick={toggleMenu}
                         aria-label="Open Menu"
-                        className="md:hidden w-10 h-10 flex items-center justify-center"
+                        className="md:hidden w-10 h-10 flex items-center justify-center menu menu-btn"
                     >
-                        <Menu className="w-6 h-6 text-gray-900" />
+                        <Menu className=" w-6 h-6 text-gray-900" />
                     </button>
                 </div>
             </div>
@@ -126,7 +116,10 @@ const Header = () => {
                     className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50"
                     onClick={() => setIsSearchOpen(false)}
                 >
-                    <div className="mt-4 w-full max-w-md p-2 bg-white rounded-md shadow-lg relative" onClick={(e) => e.stopPropagation()}>
+                    <div
+                        className="mt-4 w-full max-w-md p-2 bg-white rounded-md shadow-lg relative"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <input
                             type="text"
                             placeholder="Search..."
@@ -141,26 +134,35 @@ const Header = () => {
             {isMenuOpen && (
                 <div
                     className="fixed inset-0 z-50 backdrop-blur-sm bg-white/70"
-                    onClick={handleOverlayClick}
+                    onClick={() => setIsMenuOpen(false)} // Menüyü kapatır
                 >
-                    <div className="md:hidden p-28 flex flex-col items-center">
+                    <div
+                        className="md:hidden p-28 flex flex-col items-center bg-white"
+                        onClick={(e) => e.stopPropagation()} // İçeriğe tıklamaları engeller
+                    >
+                        <button
+                            onClick={() => setIsMenuOpen(false)} // Menüden çıkmak için X butonu
+                            className="absolute top-6 right-6 text-3xl text-gray-600"
+                        >
+                            <X /> {/* X icon */}
+                        </button>
                         {data.menu.map((item) => (
-                            <div key={item.id} className="relative">
+                            <div key={item.id} className="relative dropdown">
                                 <a
                                     href={item.link}
-                                    className="block font-bold text-2xl sm:xl text-gray-600 py-2 hover:text-pinky no-underline"
-                                    onClick={(e) => handleMobileShopDropdownToggle(e, item.title)}
+                                    className="block font-bold text-2xl text-gray-600 py-2 hover:text-pinky no-underline"
+                                    onClick={item.title === "Shop" ? toggleShopDropdown : null}
                                 >
                                     {item.title}
                                     {item.title === "Shop" && <ChevronDown className="ml-1 inline-block w-4 h-4" />}
                                 </a>
-                                {isMobileShopDropdownOpen && item.title === "Shop" && (
+                                {isShopDropdownOpen && item.title === "Shop" && (
                                     <div className="ml-4 mt-2 w-full bg-white border border-gray-300 shadow-md rounded-md">
                                         {["Man", "Woman"].map((gender) => (
                                             <a
                                                 key={gender}
                                                 href={`/shop/${gender.toLowerCase()}`}
-                                                className="block font-semibold text-md text-gray-500 py-2 hover:text-pinky no-underline py-2 px-4"
+                                                className="block font-semibold text-md text-gray-500 py-2 hover:text-pinky no-underline px-4"
                                             >
                                                 {gender}
                                             </a>
@@ -169,15 +171,17 @@ const Header = () => {
                                 )}
                             </div>
                         ))}
-                        {data.actions.map((action) => action.type === "button" && (
-                            <a
-                                key={action.id}
-                                href={action.link}
-                                className="block font-bold text-2xl sm:xl text-gray-600 py-2 hover:text-pinky no-underline"
-                            >
-                                {action.title}
-                            </a>
-                        ))}
+                        {data.actions.map((action) =>
+                            action.type === "button" ? (
+                                <a
+                                    key={action.id}
+                                    href={action.link}
+                                    className="block font-bold text-2xl text-gray-600 py-2 hover:text-pinky no-underline"
+                                >
+                                    {action.title}
+                                </a>
+                            ) : null
+                        )}
                     </div>
                 </div>
             )}
