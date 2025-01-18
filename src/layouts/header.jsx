@@ -140,7 +140,7 @@ const Header = () => {
 
             {isMenuOpen && (
                 <div
-                    className="fixed inset-0 z-50 backdrop-blur-sm bg-white/30"
+                    className="fixed inset-0 z-50 backdrop-blur-sm bg-white/70"
                     onClick={handleOverlayClick}
                 >
                     <div className="md:hidden p-28 flex flex-col items-center">
