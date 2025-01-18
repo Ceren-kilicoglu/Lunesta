@@ -143,12 +143,12 @@ const Header = () => {
                     className="fixed inset-0 z-50 backdrop-blur-sm bg-white/30"
                     onClick={handleOverlayClick}
                 >
-                    <div className="md:hidden p-4 flex flex-col items-center">
+                    <div className="md:hidden p-28 flex flex-col items-center">
                         {data.menu.map((item) => (
                             <div key={item.id} className="relative">
                                 <a
                                     href={item.link}
-                                    className="block font-bold text-xl sm:xl text-gray-500 py-2 hover:text-pinky no-underline"
+                                    className="block font-bold text-xl sm:xl text-gray-600 py-2 hover:text-pinky no-underline"
                                     onClick={(e) => handleMobileShopDropdownToggle(e, item.title)}
                                 >
                                     {item.title}
@@ -160,7 +160,7 @@ const Header = () => {
                                             <a
                                                 key={gender}
                                                 href={`/shop/${gender.toLowerCase()}`}
-                                                className="block text-md text-gray-500 py-2 hover:text-pinky no-underline py-2 px-4"
+                                                className="block font-semibold text-md text-gray-500 py-2 hover:text-pinky no-underline py-2 px-4"
                                             >
                                                 {gender}
                                             </a>
@@ -173,7 +173,7 @@ const Header = () => {
                             <a
                                 key={action.id}
                                 href={action.link}
-                                className="block font-bold text-xl sm:xl text-gray-500 py-2 hover:text-pinky no-underline"
+                                className="block font-bold text-xl sm:xl text-gray-600 py-2 hover:text-pinky no-underline"
                             >
                                 {action.title}
                             </a>
