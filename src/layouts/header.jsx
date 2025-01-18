@@ -148,7 +148,7 @@ const Header = () => {
                             <div key={item.id} className="relative">
                                 <a
                                     href={item.link}
-                                    className="block font-bold text-xl sm:xl text-gray-600 py-2 hover:text-pinky no-underline"
+                                    className="block font-bold text-2xl sm:xl text-gray-600 py-2 hover:text-pinky no-underline"
                                     onClick={(e) => handleMobileShopDropdownToggle(e, item.title)}
                                 >
                                     {item.title}
@@ -173,7 +173,7 @@ const Header = () => {
                             <a
                                 key={action.id}
                                 href={action.link}
-                                className="block font-bold text-xl sm:xl text-gray-600 py-2 hover:text-pinky no-underline"
+                                className="block font-bold text-2xl sm:xl text-gray-600 py-2 hover:text-pinky no-underline"
                             >
                                 {action.title}
                             </a>
