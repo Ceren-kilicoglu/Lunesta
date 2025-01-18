@@ -16,6 +16,26 @@ const Header = () => {
         setIsSearchOpen(!isSearchOpen);
     };
 
+    const handleOverlayClick = (e) => {
+        if (e.target === e.currentTarget) {
+            setIsMenuOpen(false);
+            setIsMobileShopDropdownOpen(false); // Close mobile shop dropdown if overlay is clicked
+        }
+    };
+
+    const handleShopDropdownToggle = (e, title) => {
+        e.preventDefault();
+        if (title === "Shop") {
+            setIsShopDropdownOpen(!isShopDropdownOpen);
+        }
+    };
+
+    const handleMobileShopDropdownToggle = (e, title) => {
+        e.preventDefault();
+        if (title === "Shop") {
+            setIsMobileShopDropdownOpen(!isMobileShopDropdownOpen);
+        }
+    };
 
     useEffect(() => {
         if (isMenuOpen || isSearchOpen) {
@@ -26,17 +46,17 @@ const Header = () => {
     }, [isMenuOpen, isSearchOpen]);
 
     return (
-        <header className="bg-white p-4 w-full h-[91px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="bg-white p-4 w-full h-[91px] max-w-7xl mx-auto px-4 sm:px-8 lg:px-8">
             <div className="flex flex-grow items-center justify-between">
-                <h1 className="text-2xl sm:text-3xl font-bold text-brand">{data.logo}</h1>
+                <h1 className="text-3xl font-bold text-pinky">{data.logo}</h1>
 
                 <nav className="hidden md:flex justify-center space-x-4 lg:space-x-6">
                     {data.menu.map((item) => (
                         <div key={item.id} className="relative">
                             <a
                                 href={item.link}
-                                className="text-sm font-bold sm:text-base text-navcolor hover:text-gray-400 no-underline"
-                                onClick={(e) => item.title === "Shop" && (e.preventDefault(), setIsShopDropdownOpen(!isShopDropdownOpen))}
+                                className="text-sm font-bold sm:text-base text-navcolor hover:text-pinky no-underline"
+                                onClick={(e) => handleShopDropdownToggle(e, item.title)}
                             >
                                 {item.title}
                                 {item.title === "Shop" && <ChevronDown className="ml-1 inline-block w-4 h-4" />}
@@ -47,7 +67,7 @@ const Header = () => {
                                         <a
                                             key={gender}
                                             href={`/shop/${gender.toLowerCase()}`}
-                                            className="block py-2 px-4 text-sm font-normal sm:text-base text-navcolor hover:text-gray-400 no-underline"
+                                            className="block py-2 px-4 text-sm font-normal sm:text-base text-navcolor hover:text-pinky no-underline"
                                         >
                                             {gender}
                                         </a>
@@ -63,7 +83,7 @@ const Header = () => {
                         <a
                             key={action.id}
                             href={action.link}
-                            className="hidden md:flex items-center text-sm font-semibold sm:text-base text-blue hover:text-gray-500 no-underline"
+                            className="hidden md:flex items-center text-sm font-semibold sm:text-base text-blue hover:text-pinky no-underline"
                         >
                             <User className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
                             {action.title}
@@ -72,7 +92,7 @@ const Header = () => {
 
                     <button
                         onClick={handleSearchToggle}
-                        className="w-6 h-6 text-gray-500 hover:text-gray-300 md:text-blue md:hover:text-gray-500"
+                        className="w-6 h-6 text-gray-500 hover:text-pinky md:text-blue "
                     >
                         <Search />
                     </button>
@@ -81,7 +101,7 @@ const Header = () => {
                         <a
                             key={action.id}
                             href={action.link}
-                            className="text-gray-500 hover:text-gray-300 md:text-blue md:hover:text-gray-500"
+                            className="text-gray-500 hover:text-pinky md:text-blue "
                         >
                             {action.name === "ShoppingCart" ? (
                                 <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -119,45 +139,49 @@ const Header = () => {
             )}
 
             {isMenuOpen && (
-                <div className="md:hidden p-4 flex flex-col items-center ">
-                    {data.menu.map((item) => (
-                        <div key={item.id} className="relative">
+                <div
+                    className="fixed inset-0 z-50 backdrop-blur-sm bg-white/30"
+                    onClick={handleOverlayClick}
+                >
+                    <div className="md:hidden p-4 flex flex-col items-center">
+                        {data.menu.map((item) => (
+                            <div key={item.id} className="relative">
+                                <a
+                                    href={item.link}
+                                    className="block font-bold text-xl sm:xl text-gray-500 py-2 hover:text-pinky no-underline"
+                                    onClick={(e) => handleMobileShopDropdownToggle(e, item.title)}
+                                >
+                                    {item.title}
+                                    {item.title === "Shop" && <ChevronDown className="ml-1 inline-block w-4 h-4" />}
+                                </a>
+                                {isMobileShopDropdownOpen && item.title === "Shop" && (
+                                    <div className="ml-4 mt-2 w-full bg-white border border-gray-300 shadow-md rounded-md">
+                                        {["Man", "Woman"].map((gender) => (
+                                            <a
+                                                key={gender}
+                                                href={`/shop/${gender.toLowerCase()}`}
+                                                className="block text-md text-gray-500 py-2 hover:text-pinky no-underline py-2 px-4"
+                                            >
+                                                {gender}
+                                            </a>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                        {data.actions.map((action) => action.type === "button" && (
                             <a
-                                href={item.link}
-                                className="block font-bold text-xl sm:xl text-gray-500 py-2 hover:text-gray-300 no-underline"
-                                onClick={(e) => item.title === "Shop" && (e.preventDefault(), setIsMobileShopDropdownOpen(!isMobileShopDropdownOpen))}
+                                key={action.id}
+                                href={action.link}
+                                className="block font-bold text-xl sm:xl text-gray-500 py-2 hover:text-pinky no-underline"
                             >
-                                {item.title}
-                                {item.title === "Shop" && <ChevronDown className="ml-1 inline-block w-4 h-4" />}
+                                {action.title}
                             </a>
-                            {isMobileShopDropdownOpen && item.title === "Shop" && (
-                                <div className="ml-4 mt-2 w-full bg-white border border-gray-300 shadow-md rounded-md">
-                                    {["Man", "Woman"].map((gender) => (
-                                        <a
-                                            key={gender}
-                                            href={`/shop/${gender.toLowerCase()}`}
-                                            className="block text-md text-gray-500 py-2 hover:text-gray-300 no-underline py-2 px-4"
-                                        >
-                                            {gender}
-                                        </a>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                    {data.actions.map((action) => action.type === "button" && (
-                        <a
-                            key={action.id}
-                            href={action.link}
-                            className="block font-bold text-xl sm:xl text-gray-500 py-2 hover:text-gray-300 no-underline"
-                        >
-                            {action.title}
-                        </a>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             )}
         </header>
-
     );
 };
 

@@ -15,7 +15,10 @@ export default {
         "blue": "#23A6F0",
         "navcolor": "#737373",
         "brand": "#252B42",
-        "darkb": "#14213D"
+        "darkb": "#14213D",
+        "stext": "#737373",
+        "gwhit": "#FAFAFA",
+        "pinky": "#fc3692"
       },
     },
   },
