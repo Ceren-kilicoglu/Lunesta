@@ -66,7 +66,7 @@ const Footer = () => {
             {/* Copyright section */}
             <div className="bg-gwhit h-[50px] w-full flex flex-grow justify-center   ">
                 <Copyright size={14} className="text-stext  mt-3 " />
-                <p className="text-stext text-md mt-3  ">{data.copyright}</p>
+                <p className="text-stext text-sm sm:text-md mt-3  ">{data.copyright}</p>
             </div>
         </footer>
 
