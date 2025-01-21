@@ -98,7 +98,7 @@ export const data = {
         {
             id: 3,
             img: '/images/woman-2.jpg',
-            buttonText: "Woman",
+            buttonText: "WOMAN",
             buttonLink: "/shop/woman",
         },
         {
