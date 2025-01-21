@@ -4,14 +4,14 @@ import { data } from '../data/data';
 const Footer = () => {
     return (
         <footer className="footer  ">
-            <div className="w-full  max-w-7xl  mx-auto px-20 p-12 sm:px-8 lg:px-6 bg-white flex flex-grow flex-col gap-16 sm:flex-row   lg:space-x-8 ">
+            <div className="w-full  max-w-7xl  mx-auto px-20 p-12 sm:px-8 lg:px-6 bg-white flex flex-grow flex-col gap-12 sm:flex-row   lg:space-x-8 ">
                 {data.footer.map((section, index) => (
                     <div key={index} className="footer-section  ">
                         <h3 className="footer-title font-bold text-brand text-xl  ">{section.title}</h3>
-                        <div className=" mt-8">
+                        <div className=" mt-2">
                             {section.items.map((item, idx) => (
                                 <h6 key={idx} className="footer-item ">
-                                    <button className="footer-button text-stext text-base text-left font-bold hover:text-pinky ">
+                                    <button className="footer-button text-stext text-base text-left font-bold hover:text-pinky leading-8 ">
                                         {item}
                                     </button>
                                 </h6>
