@@ -45,7 +45,7 @@ const Header = () => {
                                 {item.title === "Shop" && <ChevronDown className="ml-1 inline-block w-4 h-4" />}
                             </a>
                             {isShopDropdownOpen && item.title === "Shop" && (
-                                <div className="absolute left-0 mt-2 w-max-content bg-white border border-gray-300 shadow-md rounded-md">
+                                <div className="absolute left-0 mt-2 w-max-content bg-white border border-gray-300 shadow-md rounded-md z-10">
                                     {["Man", "Woman"].map((gender) => (
                                         <a
                                             key={gender}
@@ -133,7 +133,7 @@ const Header = () => {
 
             {isMenuOpen && (
                 <div
-                    className="fixed inset-0 z-50 backdrop-blur-sm bg-white/70"
+                    className="fixed inset-0 z-50  bg-white/100 "
                     onClick={() => setIsMenuOpen(false)} // Menüyü kapatır
                 >
                     <div
