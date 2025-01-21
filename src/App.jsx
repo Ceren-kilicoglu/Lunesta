@@ -1,18 +1,20 @@
-import './App.css'
-import Footer from './layouts/footer'
-import Header from './layouts/header'
+import React from 'react';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';  // Doğru import
+
+import PageContent from './layouts/pagecontent';
+import Home from './pages/Home';
+
 
 function App() {
-
-
   return (
-    <>
-      <Header />
-      <Footer />
-
-
-    </>
-  )
+    <Switch>
+      <PageContent>
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </PageContent>
+    </Switch>
+  );
 }
 
-export default App
+export default App;
