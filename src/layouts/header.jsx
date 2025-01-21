@@ -29,11 +29,11 @@ const Header = () => {
     }, [isMenuOpen, isSearchOpen]);
 
     return (
-        <header className="bg-white p-4 w-full h-[91px] max-w-7xl mx-auto px-4 sm:px-8 lg:px-8">
+        <header className="bg-white p-4 w-full h-[91px]   px-4 sm:px-8 lg:px-8">
             <div className="flex flex-grow items-center justify-between">
                 <h1 className="text-3xl font-bold text-pinky">{data.logo}</h1>
 
-                <nav className="hidden md:flex justify-center space-x-4 lg:space-x-6">
+                <nav className="hidden md:flex justify-center space-x-4 lg:space-x-6 ">
                     {data.menu.map((item) => (
                         <div key={item.id} className="relative dropdown">
                             <a

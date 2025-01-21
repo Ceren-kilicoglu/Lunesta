@@ -1,10 +1,14 @@
 import React from 'react';
 import Carouselslide from './Carousel';
+import ShopCard from './shopcard';
 
 
 function Home() {
     return (
-        <Carouselslide />
+        <div>
+            <Carouselslide />
+            <ShopCard />
+        </div>
     )
 }
 

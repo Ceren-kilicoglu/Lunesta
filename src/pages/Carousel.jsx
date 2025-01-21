@@ -9,7 +9,7 @@ function Carouselslide() {
             {data.slide.map((item) => (
                 <Carousel.Item key={item.id} className="relative">
                     <img
-                        className="d-block w-full h-[500px] md:h-[600px] object-cover  "
+                        className="d-block w-full h-[500px] md:h-[640px] object-cover  "
                         src={item.img}
                         alt={`${item.title}`}
                     />
@@ -17,7 +17,7 @@ function Carouselslide() {
                     <div className="absolute inset-0 bg-black bg-opacity-50"></div>
                     {/* Text Content */}
                     <Carousel.Caption className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
-                        <h3 className="text-3xl md:text-4xl font-bold md:mt-18">{item.title}</h3>
+                        <h1 className="text-3xl md:text-5xl font-bold md:mt-18">{item.title}</h1>
                         <p className="w-[291px] md:w-[450px] text-lg md:text-xl mt-8 ">{item.description}</p>
                         <a
                             href={item.buttonLink}
