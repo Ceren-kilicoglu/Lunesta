@@ -45,9 +45,36 @@ export const data = {
             items: ["IOS & Android", "Customers", "API", "Watch a Demo"],
         },
     ],
-    copyright: "Made With Love By Figmaland All Rights Reserved"
+    copyright: "Made With Love By Figmaland All Rights Reserved",
+
+    slide: [
+        {
+            id: 1,
+            img: '/images/hero.jpg',
+            title: 'BLACK FRIDAY',
+            description: 'We know how large objects will act, but things on a small scale just do not act that way.',
+            buttonText: "Shop Now",
+            buttonLink: "/shop",
+        },
+        {
+            id: 2,
+            img: '/images/hero-2.jpg',
+            title: 'BLACK FRIDAY',
+            description: 'We know how large objects will act, but things on a small scale just do not act that way.',
+            buttonText: "Shop Now",
+            buttonLink: "/shop",
+        },
+        {
+            id: 3,
+            img: '/images/hero.jpg',
+            title: 'BLACK FRIDAY',
+            description: 'We know how large objects will act, but things on a small scale just do not act that way.',
+            buttonText: "Shop Now",
+            buttonLink: "/shop",
+        },
 
 
+    ],
 
 
 
