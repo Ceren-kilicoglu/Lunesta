@@ -77,6 +77,41 @@ export const data = {
     ],
 
 
+    shopcard: [
+        {
+            id: 0,
+            title: "EDITOR’S PICK",
+            text: "Problems trying to resolve the conflict between ",
+        },
+        {
+            id: 1,
+            img: '/images/woman.jpg',
+            buttonText: "WOMAN",
+            buttonLink: "/shop/woman",
+        },
+        {
+            id: 2,
+            img: '/images/man.jpg',
+            buttonText: "MAN",
+            buttonLink: "/shop/man",
+        },
+        {
+            id: 3,
+            img: '/images/woman-2.jpg',
+            buttonText: "Woman",
+            buttonLink: "/shop/woman",
+        },
+        {
+            id: 4,
+            img: '/images/man-2.jpg',
+            buttonText: "MAN",
+            buttonLink: "/shop/man",
+        },
+    ],
+
+
+
+
 
 
 
