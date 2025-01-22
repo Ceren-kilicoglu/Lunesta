@@ -19,7 +19,7 @@ function ShopCard() {
                     />
                     <button
                         onClick={() => window.location.href = data.shopcard[1].buttonLink}
-                        className="relative bottom-14 left-8 text-black bg-gwhit hover:bg-pinky hover:text-white  font-medium  text-sm px-5 py-2.5  "
+                        className="relative bottom-14 left-8 text-black bg-gwhit hover:bg-gr hover:text-white  font-medium  text-sm px-5 py-2.5  "
                     >
                         {data.shopcard[1].buttonText}
                     </button>
@@ -34,7 +34,7 @@ function ShopCard() {
                     />
                     <button
                         onClick={() => window.location.href = data.shopcard[2].buttonLink}
-                        className="relative bottom-14 left-8 text-black bg-gwhit hover:bg-pinky hover:text-white  font-medium  text-sm px-5 py-2.5 "
+                        className="relative bottom-14 left-8 text-black bg-gwhit hover:bg-gr hover:text-white  font-medium  text-sm px-5 py-2.5 "
                     >
                         {data.shopcard[2].buttonText}
                     </button>
@@ -49,7 +49,7 @@ function ShopCard() {
                         />
                         <button
                             onClick={() => window.location.href = data.shopcard[3].buttonLink}
-                            className="relative bottom-14 left-8 text-black bg-gwhit hover:bg-pinky hover:text-white  font-medium  text-sm px-5 py-2.5 "
+                            className="relative bottom-14 left-8 text-black bg-gwhit hover:bg-gr hover:text-white  font-medium  text-sm px-5 py-2.5 "
                         >
                             {data.shopcard[3].buttonText}
                         </button>
@@ -64,7 +64,7 @@ function ShopCard() {
                         />
                         <button
                             onClick={() => window.location.href = data.shopcard[4].buttonLink}
-                            className="relative bottom-14 left-8 text-black bg-gwhit hover:bg-pinky hover:text-white  font-medium  text-sm px-5 py-2.5 "
+                            className="relative bottom-14 left-8 text-black bg-gwhit hover:bg-gr hover:text-white  font-medium  text-sm px-5 py-2.5 "
                         >
                             {data.shopcard[4].buttonText}
                         </button>

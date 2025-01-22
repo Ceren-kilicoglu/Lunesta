@@ -18,7 +18,8 @@ export default {
         "darkb": "#14213D",
         "stext": "#737373",
         "gwhit": "#FAFAFA",
-        "pinky": "#fc3692"
+        "pinky": "#fc3692",
+        "gr": "#f5f2f2"
       },
     },
   },
