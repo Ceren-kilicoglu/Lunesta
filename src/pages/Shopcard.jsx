@@ -10,7 +10,7 @@ function ShopCard() {
             </div>
 
             <div className="flex flex-col flex-grow sm:flex-row sm:gap-x-4  mt-12 w-max-screen sm:flex-wrap justify-center">
-                {/* İlk öğe: WOMAN */}
+
                 <div className="">
                     <img
                         src={data.shopcard[1].img}
@@ -25,7 +25,7 @@ function ShopCard() {
                     </button>
                 </div>
 
-                {/* İkinci öğe: MAN */}
+
                 <div className="">
                     <img
                         src={data.shopcard[2].img}
@@ -40,7 +40,7 @@ function ShopCard() {
                     </button>
                 </div>
                 <div className='md:flex lg:flex-col md:gap-x-4'>
-                    {/* Üçüncü öğe: WOMAN */}
+
                     <div className="">
                         <img
                             src={data.shopcard[3].img}
@@ -55,7 +55,7 @@ function ShopCard() {
                         </button>
                     </div>
 
-                    {/* Dördüncü öğe: MAN */}
+
                     <div className="">
                         <img
                             src={data.shopcard[4].img}
